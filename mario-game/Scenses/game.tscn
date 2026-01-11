@@ -1,11 +1,14 @@
-[gd_scene load_steps=16 format=4 uid="uid://cgomkpdfeai4x"]
+[gd_scene load_steps=19 format=4 uid="uid://cgomkpdfeai4x"]
 
 [ext_resource type="PackedScene" uid="uid://cihxe5v223uje" path="res://Scenses/player.tscn" id="1_ivxi6"]
+[ext_resource type="Script" uid="uid://ct6js6wxv4u6q" path="res://Scripts/game_manager.gd" id="1_u5i1p"]
 [ext_resource type="PackedScene" uid="uid://cesy0fmax8x33" path="res://Scenses/coin.tscn" id="2_did6e"]
 [ext_resource type="Texture2D" uid="uid://cteu6ha1p3tfr" path="res://Assets/sprites/world_tileset.png" id="2_jjp6n"]
 [ext_resource type="PackedScene" uid="uid://dokjux1hpi2ct" path="res://Scenses/Platform.tscn" id="3_les56"]
 [ext_resource type="PackedScene" uid="uid://cekt3hg28lquh" path="res://Scenses/kill_zone.tscn" id="5_ks4bd"]
 [ext_resource type="PackedScene" uid="uid://dtaco40iwa2l" path="res://Scenses/slime.tscn" id="6_gxrxj"]
+[ext_resource type="FontFile" uid="uid://bcdfsvk205sho" path="res://Assets/fonts/PixelOperator8.ttf" id="7_7ex14"]
+[ext_resource type="FontFile" uid="uid://bkrebbg5km2m3" path="res://Assets/fonts/PixelOperator8-Bold.ttf" id="8_2jrcp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_les56"]
 texture = ExtResource("2_jjp6n")
@@ -253,6 +256,21 @@ _data = {
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_u5i1p")
+
+[node name="Score" type="Label" parent="GameManager"]
+offset_left = 373.0
+offset_top = -240.0
+offset_right = 528.0
+offset_bottom = -217.0
+theme_override_colors/font_color = Color(0, 0.12156863, 0.7254902, 1)
+theme_override_fonts/font = ExtResource("8_2jrcp")
+theme_override_font_sizes/font_size = 8
+text = "You Collected: X Coins"
+horizontal_alignment = 1
+
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, -1)
 scale = Vector2(1.0545994, 1.0030087)
@@ -293,7 +311,7 @@ shape = SubResource("WorldBoundaryShape2D_gxrxj")
 [node name="Coins" type="Node" parent="."]
 
 [node name="Coin" parent="Coins" instance=ExtResource("2_did6e")]
-position = Vector2(142.00002, -8)
+position = Vector2(172.00002, 7)
 scale = Vector2(1.0137596, 1.0137596)
 
 [node name="Coin2" parent="Coins" instance=ExtResource("2_did6e")]
@@ -352,5 +370,41 @@ libraries = {
 }
 autoplay = "MoveV"
 
-[node name="Slime" parent="." instance=ExtResource("6_gxrxj")]
+[node name="Labels" type="Node" parent="."]
+
+[node name="jew" type="Label" parent="Labels"]
+offset_left = 379.0
+offset_top = -254.0
+offset_right = 534.0
+offset_bottom = -231.0
+theme_override_colors/font_color = Color(0, 0.12156863, 0.7254902, 1)
+theme_override_fonts/font = ExtResource("8_2jrcp")
+theme_override_font_sizes/font_size = 8
+text = "JEW.!!!
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Labels"]
+offset_left = 742.0
+offset_top = -272.0
+offset_right = 878.0
+offset_bottom = -249.0
+theme_override_colors/font_color = Color(0, 0.12156863, 0.7254902, 1)
+theme_override_fonts/font = ExtResource("7_7ex14")
+theme_override_font_sizes/font_size = 8
+text = "Easy..?"
+
+[node name="Label" type="Label" parent="Labels"]
+offset_left = -28.0
+offset_top = -48.0
+offset_right = 108.0
+offset_bottom = -25.0
+theme_override_colors/font_color = Color(0, 0.12156863, 0.7254902, 1)
+theme_override_fonts/font = ExtResource("7_7ex14")
+theme_override_font_sizes/font_size = 8
+text = "Have Fun..."
+
+[node name="enemy" type="Node" parent="."]
+
+[node name="Slime" parent="enemy" instance=ExtResource("6_gxrxj")]
 position = Vector2(194, 15)
