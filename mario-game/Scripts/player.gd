@@ -18,14 +18,17 @@ func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
-	if direction!=0:
-		animated_sprite_2d.play("Run")
-		if direction<0:
-			animated_sprite_2d.flip_h = true
-		if direction>0:
-			animated_sprite_2d.flip_h = false
+	if is_on_floor():
+		if direction!=0:
+			animated_sprite_2d.play("Run")
+			if direction<0:
+				animated_sprite_2d.flip_h = true
+			if direction>0:
+				animated_sprite_2d.flip_h = false
+		else:
+			animated_sprite_2d.play("idle")
 	else:
-		animated_sprite_2d.play("idle")
+		animated_sprite_2d.play("jump")
 	if direction:
 		velocity.x = direction * SPEED
 	else:
