@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://brjt3w7rcxrfw"]
+
+[ext_resource type="Texture2D" uid="uid://l8iw8vow0qjg" path="res://Assets/pralex/bgmain.png" id="1_bgmain"]
+[ext_resource type="Texture2D" uid="uid://b5fvo3sea32ow" path="res://Assets/pralex/bg1.png" id="2_bg1"]
+[ext_resource type="Texture2D" uid="uid://co5bgituqglmx" path="res://Assets/pralex/mainground.png" id="3_mainground"]
+[ext_resource type="Texture2D" uid="uid://cagrj0xhrosr1" path="res://Assets/pralex/forground.png" id="4_forground"]
+[ext_resource type="PackedScene" uid="uid://cihxe5v223uje" path="res://Scenses/player.tscn" id="5_player"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ground"]
+distance = -45.0
+
+[node name="World" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="BGMain" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -10
+motion_scale = Vector2(0.1, 0)
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BGMain"]
+texture = ExtResource("1_bgmain")
+centered = false
+
+[node name="BG1" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = -5
+motion_scale = Vector2(0.3, 0)
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/BG1"]
+texture = ExtResource("2_bg1")
+centered = false
+
+[node name="MainGround" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1, 0)
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/MainGround"]
+texture = ExtResource("3_mainground")
+centered = false
+
+[node name="Foreground" type="ParallaxLayer" parent="ParallaxBackground"]
+z_index = 10
+motion_scale = Vector2(1.4, 0)
+motion_mirroring = Vector2(320, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/Foreground"]
+texture = ExtResource("4_forground")
+centered = false
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(0, 158)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape2D_ground")
+
+[node name="Player" parent="." instance=ExtResource("5_player")]
+position = Vector2(100, 100)
